@@ -8,10 +8,14 @@ spring:
     serialization:
       write-dates-as-timestamps: false
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/eat_what?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/eat_what?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useServerPrepStmts=true&cachePrepStmts=true}
     username: ${SPRING_DATASOURCE_USERNAME:root}
     password: ${SPRING_DATASOURCE_PASSWORD:111111}
     driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:com.mysql.cj.jdbc.Driver}
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
   sql:
     init:
       mode: always

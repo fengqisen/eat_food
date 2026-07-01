@@ -14,6 +14,11 @@ WORKDIR /app
 
 COPY --from=builder /app/target/eat-what-1.0.0.jar app.jar
 
+RUN apk add --no-cache tzdata && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone
+
+ENV TZ=Asia/Shanghai
+ENV JAVA_OPTS="-Duser.timezone=Asia/Shanghai"
+
 EXPOSE 8080
 
 CMD ["java", "-jar", "app.jar", "--server.port=${PORT:-8080}"]
