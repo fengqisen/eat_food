@@ -35,7 +35,6 @@ public class RecommendServiceImpl implements RecommendService {
         }
 
         FoodItem selectedFood = weightedRandomSelect(availableFood);
-        historyService.recordRecommendation(userId, selectedFood.getId());
 
         result.put("success", true);
         result.put("food", selectedFood);
