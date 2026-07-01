@@ -10,7 +10,7 @@ spring:
   sql:
     init:
       mode: always
-      schema-locations: classpath:schema.sql
+      schema-locations: classpath:sql/schema-postgresql.sql
 
 mybatis-plus:
   configuration:
