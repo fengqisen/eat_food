@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.eatwhat.entity.FoodItem;
 import com.eatwhat.mapper.FoodItemMapper;
 import com.eatwhat.service.FoodService;
+import com.eatwhat.service.ImageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -11,6 +13,9 @@ import java.util.List;
 
 @Service
 public class FoodServiceImpl extends ServiceImpl<FoodItemMapper, FoodItem> implements FoodService {
+
+    @Autowired
+    private ImageService imageService;
 
     @Override
     public FoodItem addFood(FoodItem foodItem) {
@@ -38,6 +43,10 @@ public class FoodServiceImpl extends ServiceImpl<FoodItemMapper, FoodItem> imple
 
     @Override
     public boolean deleteFood(Long id) {
+        FoodItem foodItem = getById(id);
+        if (foodItem != null && foodItem.getImagePublicId() != null && !foodItem.getImagePublicId().isEmpty()) {
+            imageService.delete(foodItem.getImagePublicId());
+        }
         return removeById(id);
     }
 
