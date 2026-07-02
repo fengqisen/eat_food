@@ -73,6 +73,7 @@ public class HistoryServiceImpl extends ServiceImpl<FoodHistoryMapper, FoodHisto
                 item.put("foodName", food.getName());
                 item.put("foodType", food.getType());
                 item.put("foodTag", food.getTag());
+                item.put("foodImageUrl", food.getImageUrl());
             }
 
             result.add(item);
