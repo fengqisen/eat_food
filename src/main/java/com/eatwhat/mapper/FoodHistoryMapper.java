@@ -15,4 +15,6 @@ public interface FoodHistoryMapper extends BaseMapper<FoodHistory> {
             @Param("userId") Long userId,
             @Param("startDate") LocalDate startDate,
             @Param("endDate") LocalDate endDate);
+
+    int deleteByFoodId(@Param("foodId") Long foodId);
 }

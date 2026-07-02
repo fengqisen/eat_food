@@ -81,4 +81,9 @@ public class HistoryServiceImpl extends ServiceImpl<FoodHistoryMapper, FoodHisto
 
         return result;
     }
+
+    @Override
+    public void removeByFoodId(Long foodId) {
+        baseMapper.deleteByFoodId(foodId);
+    }
 }

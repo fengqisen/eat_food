@@ -16,4 +16,6 @@ public interface HistoryService extends IService<FoodHistory> {
     boolean confirmChoice(Long historyId, Integer isChosen, String note);
 
     List<Map<String, Object>> getHistoryList(Long userId, LocalDate startDate, LocalDate endDate);
+
+    void removeByFoodId(Long foodId);
 }
