@@ -28,6 +28,10 @@ public class FoodItem {
 
     private Integer status;
 
+    private String imageUrl;
+
+    private String imagePublicId;
+
     private LocalDateTime lastEatTime;
 
     private LocalDateTime createTime;

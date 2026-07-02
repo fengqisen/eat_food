@@ -23,3 +23,8 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.eatwhat.entity
+
+cloudinary:
+  cloud-name: jiizni7p
+  api-key: 928488389537371
+  api-secret: ziG0bnmhLIsi6NwbT-tPsUxKakM
