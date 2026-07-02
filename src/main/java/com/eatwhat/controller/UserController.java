@@ -3,6 +3,7 @@ package com.eatwhat.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.eatwhat.entity.User;
 import com.eatwhat.mapper.UserMapper;
+import com.eatwhat.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,8 +51,14 @@ public class UserController {
             User found = userMapper.selectOne(wrapper);
             
             if (found != null) {
+                String token = JwtUtil.generateToken(found.getId(), found.getUsername());
+                Map<String, Object> data = new HashMap<>();
+                data.put("id", found.getId());
+                data.put("username", found.getUsername());
+                data.put("token", token);
+                
                 result.put("success", true);
-                result.put("data", found);
+                result.put("data", data);
             } else {
                 result.put("success", false);
                 result.put("message", "用户名或密码错误");

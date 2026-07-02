@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS food_item (
     tag VARCHAR(100),
     rating INTEGER DEFAULT 3,
     status INTEGER DEFAULT 1,
+    meal_type VARCHAR(20) DEFAULT 'ALL',
     last_eat_time TIMESTAMP,
     create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -22,6 +23,7 @@ CREATE TABLE IF NOT EXISTS food_history (
     user_id BIGINT NOT NULL,
     food_id BIGINT NOT NULL,
     date DATE NOT NULL,
+    meal_type VARCHAR(20),
     is_chosen INTEGER DEFAULT 0,
     note VARCHAR(500),
     create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP

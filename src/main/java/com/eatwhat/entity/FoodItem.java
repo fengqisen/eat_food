@@ -20,6 +20,8 @@ public class FoodItem {
 
     private String type;
 
+    private String mealType;
+
     private String tag;
 
     private Integer rating;

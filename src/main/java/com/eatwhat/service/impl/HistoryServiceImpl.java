@@ -24,9 +24,15 @@ public class HistoryServiceImpl extends ServiceImpl<FoodHistoryMapper, FoodHisto
 
     @Override
     public FoodHistory recordRecommendation(Long userId, Long foodId) {
+        return recordRecommendation(userId, foodId, null);
+    }
+
+    @Override
+    public FoodHistory recordRecommendation(Long userId, Long foodId, String mealType) {
         FoodHistory history = new FoodHistory();
         history.setUserId(userId);
         history.setFoodId(foodId);
+        history.setMealType(mealType);
         history.setDate(LocalDate.now());
         history.setIsChosen(0);
         history.setCreateTime(LocalDateTime.now());
@@ -57,6 +63,7 @@ public class HistoryServiceImpl extends ServiceImpl<FoodHistoryMapper, FoodHisto
             Map<String, Object> item = new HashMap<>();
             item.put("id", history.getId());
             item.put("date", history.getDate());
+            item.put("mealType", history.getMealType());
             item.put("isChosen", history.getIsChosen());
             item.put("note", history.getNote());
             item.put("createTime", history.getCreateTime());

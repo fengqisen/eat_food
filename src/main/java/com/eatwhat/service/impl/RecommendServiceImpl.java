@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
@@ -23,14 +24,26 @@ public class RecommendServiceImpl implements RecommendService {
     @Override
     public Map<String, Object> recommendToday(Long userId) {
         Map<String, Object> result = new HashMap<>();
+        
+        String currentMealType = detectCurrentMealType();
+        
         List<FoodItem> availableFood = foodService.lambdaQuery()
                 .eq(FoodItem::getUserId, userId)
                 .eq(FoodItem::getStatus, 1)
+                .and(wrapper -> wrapper
+                        .eq(FoodItem::getMealType, currentMealType)
+                        .or()
+                        .eq(FoodItem::getMealType, "ALL")
+                        .or()
+                        .isNull(FoodItem::getMealType)
+                        .or()
+                        .eq(FoodItem::getMealType, "")
+                )
                 .list();
 
         if (availableFood.isEmpty()) {
             result.put("success", false);
-            result.put("message", "还没有可用的食物，请先添加！");
+            result.put("message", "还没有可用的" + getMealTypeName(currentMealType) + "食物，请先添加！");
             return result;
         }
 
@@ -38,8 +51,40 @@ public class RecommendServiceImpl implements RecommendService {
 
         result.put("success", true);
         result.put("food", selectedFood);
+        result.put("mealType", currentMealType);
+        result.put("mealTypeName", getMealTypeName(currentMealType));
         result.put("reason", generateReason(selectedFood));
         return result;
+    }
+
+    private String detectCurrentMealType() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Shanghai"));
+        int hour = now.getHour();
+        int minute = now.getMinute();
+        int totalMinutes = hour * 60 + minute;
+        
+        if (totalMinutes >= 300 && totalMinutes <= 600) {
+            return "BREAKFAST";
+        } else if (totalMinutes >= 601 && totalMinutes <= 870) {
+            return "LUNCH";
+        } else if (totalMinutes >= 871 && totalMinutes <= 1320) {
+            return "DINNER";
+        } else {
+            return "DINNER";
+        }
+    }
+
+    private String getMealTypeName(String mealType) {
+        switch (mealType) {
+            case "BREAKFAST":
+                return "早餐";
+            case "LUNCH":
+                return "中餐";
+            case "DINNER":
+                return "晚餐";
+            default:
+                return "餐";
+        }
     }
 
     @Override

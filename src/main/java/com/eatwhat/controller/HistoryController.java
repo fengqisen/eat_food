@@ -53,10 +53,13 @@ public class HistoryController {
     }
 
     @PostMapping("/record")
-    public Map<String, Object> recordRecommendation(@RequestParam Long userId, @RequestParam Long foodId) {
+    public Map<String, Object> recordRecommendation(
+            @RequestParam Long userId, 
+            @RequestParam Long foodId,
+            @RequestParam(required = false) String mealType) {
         Map<String, Object> result = new HashMap<>();
         try {
-            FoodHistory history = historyService.recordRecommendation(userId, foodId);
+            FoodHistory history = historyService.recordRecommendation(userId, foodId, mealType);
             result.put("success", true);
             result.put("data", history);
         } catch (Exception e) {

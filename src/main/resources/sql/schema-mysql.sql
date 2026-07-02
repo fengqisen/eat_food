@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS food_item (
     tag VARCHAR(100),
     rating INT DEFAULT 3,
     status INT DEFAULT 1,
+    meal_type VARCHAR(20) DEFAULT 'ALL',
     last_eat_time DATETIME,
     create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -22,6 +23,7 @@ CREATE TABLE IF NOT EXISTS food_history (
     user_id BIGINT NOT NULL,
     food_id BIGINT NOT NULL,
     date DATE NOT NULL,
+    meal_type VARCHAR(20),
     is_chosen INT DEFAULT 0,
     note VARCHAR(500),
     create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP

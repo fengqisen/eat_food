@@ -19,6 +19,8 @@ public class FoodHistory {
 
     private Long foodId;
 
+    private String mealType;
+
     private LocalDate date;
 
     private Integer isChosen;

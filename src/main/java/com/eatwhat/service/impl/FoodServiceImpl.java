@@ -23,6 +23,9 @@ public class FoodServiceImpl extends ServiceImpl<FoodItemMapper, FoodItem> imple
         if (foodItem.getType() == null || foodItem.getType().isEmpty()) {
             foodItem.setType("其他");
         }
+        if (foodItem.getMealType() == null || foodItem.getMealType().isEmpty()) {
+            foodItem.setMealType("ALL");
+        }
         foodItem.setCreateTime(LocalDateTime.now());
         save(foodItem);
         return foodItem;

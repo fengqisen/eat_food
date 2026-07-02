@@ -11,8 +11,10 @@ D:\food\boot\src\main\java\com\eatwhat\EatWhatApplication.java
 D:\food\boot\src\main\java\com\eatwhat\mapper\FoodItemMapper.java
 D:\food\boot\src\main\java\com\eatwhat\entity\User.java
 D:\food\boot\src\main\java\com\eatwhat\service\HistoryService.java
+D:\food\boot\src\main\java\com\eatwhat\interceptor\JwtInterceptor.java
 D:\food\boot\src\main\java\com\eatwhat\controller\FoodController.java
 D:\food\boot\src\main\java\com\eatwhat\service\impl\HistoryServiceImpl.java
+D:\food\boot\src\main\java\com\eatwhat\util\JwtUtil.java
 D:\food\boot\src\main\java\com\eatwhat\entity\FoodItem.java
 D:\food\boot\src\main\java\com\eatwhat\service\impl\RecommendServiceImpl.java
 D:\food\boot\src\main\java\com\eatwhat\mapper\UserMapper.java

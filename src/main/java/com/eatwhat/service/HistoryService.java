@@ -11,6 +11,8 @@ public interface HistoryService extends IService<FoodHistory> {
 
     FoodHistory recordRecommendation(Long userId, Long foodId);
 
+    FoodHistory recordRecommendation(Long userId, Long foodId, String mealType);
+
     boolean confirmChoice(Long historyId, Integer isChosen, String note);
 
     List<Map<String, Object>> getHistoryList(Long userId, LocalDate startDate, LocalDate endDate);

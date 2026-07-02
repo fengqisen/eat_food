@@ -2,15 +2,20 @@ server:
   port: ${PORT:8080}
 
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    serialization:
+      write-dates-as-timestamps: false
   datasource:
-    # url: jdbc:mysql://localhost:3306/eat_what?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-    # username: root
-    # password: 111111
-    # driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/eat_what?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/eat_what?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useServerPrepStmts=true&cachePrepStmts=true}
     username: ${SPRING_DATASOURCE_USERNAME:root}
     password: ${SPRING_DATASOURCE_PASSWORD:111111}
     driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:com.mysql.cj.jdbc.Driver}
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
 
 mybatis-plus:
   configuration:
